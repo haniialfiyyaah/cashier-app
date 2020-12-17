@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <form action="/transactions/add" method="POST">
+            <select name="ItemId" id="ItemId" required>
+                <option value="" disabled selected>CHOOSE ITEM</option>
+                <% items.forEach(el => { %>
+                    <option value="<%= el.id %> "><%= el.name %> - Stock <%= el.stock %> </option>
+                <% }) %>
+            </select>
+            <input type="number" name="quantity" placeholder="Quantity"/>
+            <input type="submit" value="ADD">
+        </form>
+    </div>
+    <div>
+        <table border="1">
+            <thead>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                <% if (cart) { %>
+                    <% cart.forEach((item, i) => { %>
+                        <tr>
+                            <td><%= i + 1 %> </td>
+                            <td><%= item.name %> </td>
+                            <td><%= item.quantity %> </td>
+                            <td><%= item.price %> </td>
+                            <td><%= item.total %> </td>
+                            <td><a href="/transactions/cart/<%= item.id %>/cancel">CANCEL</a></td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="6">Empty Data</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <a href="/transactions/add/pay">BUY</a>
+</body>
+</html>

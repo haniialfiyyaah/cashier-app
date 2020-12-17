@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+const countTotal = require('../helpers/countTotal');
+const generateInvoice = require('../helpers/generateInvoice');
 module.exports = (sequelize, DataTypes) => {
   class Transaction extends Model {
     /**
@@ -20,6 +22,12 @@ module.exports = (sequelize, DataTypes) => {
     invoice: DataTypes.STRING,
     total: DataTypes.INTEGER
   }, {
+    hooks: {
+      beforeCreate(transactions, options) {
+        transactions.invoice = generateInvoice('Hani')
+        transactions.total = countTotal()
+      }
+    },
     sequelize,
     modelName: 'Transaction',
   });
