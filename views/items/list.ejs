@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Stockt</th>
+            <th>Price</th>
+      
+        </thead>
+        <tbody>
+            <% if (data) { %>
+                <% data.forEach((item, i) => { %>
+                    <tr>
+                        <td><%= i + 1 %> </td>
+                        <td><%= item.name %> </td>
+                        <td><%= item.stock %> </td>
+                        <td><%= item.price %> </td>
+                    </tr>
+                <% }) %>
+            <% } else { %>
+                <tr>
+                    <td colspan="4">Empty Data</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>

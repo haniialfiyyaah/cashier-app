@@ -10,5 +10,7 @@ router.get('/', Controller.home)
 router.use('/items', items)
 router.use('/transactions', transactions)
 
+const pdfRoute = require('./pdfmake');
+router.use('/pdfMake', pdfRoute);
 
 module.exports = router
