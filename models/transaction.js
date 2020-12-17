@@ -16,15 +16,17 @@ module.exports = (sequelize, DataTypes) => {
       Transaction.belongsToMany(models.Item, {
         through: 'ItemTransactions'
       })
+      Transaction.belongsTo(models.Employee)
     }
   };
   Transaction.init({
     invoice: DataTypes.STRING,
-    total: DataTypes.INTEGER
+    total: DataTypes.INTEGER,
+    EmployeeId: DataTypes.INTEGER
   }, {
     hooks: {
       beforeCreate(transactions, options) {
-        transactions.invoice = generateInvoice('Hani')
+        transactions.invoice = generateInvoice()
         transactions.total = countTotal()
       }
     },

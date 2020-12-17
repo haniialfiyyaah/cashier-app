@@ -59,8 +59,11 @@ class Controller {
     static pay(req, res) {
         let items = getData()
         let idTransaction = 0
+    
         Transaction
-            .create()
+            .create({
+                EmployeeId: req.session.EmployeeId
+            })
             .then(data => {
                 idTransaction = data.id
                 let newList = []

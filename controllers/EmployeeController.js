@@ -24,7 +24,7 @@ class Controller {
             })
             .then(data => {
                 if (compare(password, data.password)) {
-                    req.session.cookie.id = data.id
+                    req.session.EmployeeId = data.id
                     req.session.name = data.name
                     req.session.username = data.username
                     res.redirect('/')
