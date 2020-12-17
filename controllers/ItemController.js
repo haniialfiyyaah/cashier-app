@@ -5,7 +5,7 @@ class Controller {
     static list(req, res) {
         Item
             .findAll()
-            .then(data => res.send(data))
+            .then(data => res.render('items/list', {data}))
             .catch(err => res.send(err))
     }
 }
