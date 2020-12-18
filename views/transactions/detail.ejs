@@ -3,33 +3,35 @@
 
 
 <body>
-  <h1 class="hsatu">LIST TRANSACTION</h1>
+
+  <h3>Invoice: <%= data.invoice %></h3>  
+  <h3>Date: <%= data.createdAt %> </h3> 
+  <h3>Total: <%= data.total %> </h3> 
+
+  <h1 class="hsatu">LIST ITEMS</h1>
   <table class="table table-bordered table-dark">
     <thead>
       <th>No</th>
-      <th>Invoice</th>
-      <th>Date</th>
-      <th>Total</th>
-      <th>Action</th>
+      <th>Nama</th>
+      <th>Quantity</th>
+      <th>Price</th>
+
     </thead>
     <tbody>
-      <% if (data) { %>
-        <% data.forEach((transaction, i)=> { %>
+      <% if (data.Items) { %>
+        <% data.Items.forEach((item, i)=> { %>
           <tr>
             <td>
               <%= i + 1 %>
             </td>
             <td>
-              <%= transaction.invoice %>
+              <%= item.name %>
             </td>
             <td>
-              <%= transaction.createdAt %>
+              <%= data.quantity %>
             </td>
             <td>
-              <%= transaction.nominal %>
-            </td>
-            <td>
-                <a href="/transactions/<%= transaction.id %>/detail">DETAIL</a>
+              <%= item.nominal %>
             </td>
           </tr>
           <% }) %>

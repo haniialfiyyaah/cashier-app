@@ -2,7 +2,7 @@
 
 class Controller {
     static home(req, res) {
-        res.render('index')
+        res.render('index', {name: req.session.name})
     }
 }
 

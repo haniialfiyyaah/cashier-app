@@ -24,14 +24,14 @@ class Controller {
             })
             .then(data => {
                 if (compare(password, data.password)) {
-                    req.session.cookie.id = data.id
+                    req.session.EmployeeId = data.id
                     req.session.name = data.name
                     req.session.username = data.username
                     res.redirect('/')
                 }
                 // res.send(data)
             })
-            .catch(err => res.send('EERROR'))
+            .catch(err => res.send(err))
     }
     static logout(req, res) {
         delete req.session.cookie.id

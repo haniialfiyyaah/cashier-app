@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const formatRupiah = require('../helpers/formatRupiah');
 module.exports = (sequelize, DataTypes) => {
   class Item extends Model {
     /**
@@ -9,11 +10,15 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+    get nominal() {
+      return formatRupiah(this.price)
+    }
     static associate(models) {
       // define association here
       Item.belongsToMany(models.Transaction, {
         through: 'ItemTransactions'
       })
+      // Item.hasMany(models.ItemTransaction)
     }
   };
   Item.init({
