@@ -53,30 +53,34 @@ class Controller {
     res.redirect("/transactions/add");
   }
 
-  static pay(req, res) {
-    let items = getData();
-    let idTransaction = 0;
-    Transaction.create()
-      .then((data) => {
-        idTransaction = data.id;
-        let newList = [];
-        items.forEach((el) => {
-          let itemTransaction = {
-            TransactionId: data.id,
-            ItemId: el.id,
-            quantity: el.quantity,
-          };
-          newList.push(itemTransaction);
-        });
-        return ItemTransaction.bulkCreate(newList);
-      })
-      .then((data) => {
-        // res.send(data)
-        res.redirect(`/transactions/${idTransaction}/detail`);
-        destroy();
-      })
-      .catch((err) => res.send(err));
-  }
+    static pay(req, res) {
+        let items = getData()
+        let idTransaction = 0
+    
+        Transaction
+            .create({
+                EmployeeId: req.session.EmployeeId
+            })
+            .then(data => {
+                idTransaction = data.id
+                let newList = []
+                items.forEach(el => {
+                    let itemTransaction = {
+                        TransactionId: data.id,
+                        ItemId: el.id,
+                        quantity: el.quantity
+                    }
+                    newList.push(itemTransaction)
+                });
+                return ItemTransaction.bulkCreate(newList)
+            })
+            .then(data => {
+                // res.send(data)
+                res.redirect(`/transactions/${idTransaction}/detail`)
+                destroy()
+            })
+            .catch(err => res.send(err))
+    }
 }
 
 module.exports = Controller;

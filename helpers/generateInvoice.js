@@ -1,5 +1,5 @@
 
-let generateInvoice = (employeeName) => {
+let generateInvoice = () => {
     const d = new Date();
     const year = d.getFullYear();
     let month = d.getMonth()+1;
@@ -10,7 +10,7 @@ let generateInvoice = (employeeName) => {
     month = month.toString().length < 2 ? month = `0${month}` : month
     day = day.toString().length < 2 ? day = `0${day}` : day
 
-    return `${year}/${employeeName}/${month}${day}/${h}${m}${s}`
+    return `TF/${year}/${month}${day}/${h}${m}${s}`
 }
 
 module.exports = generateInvoice
