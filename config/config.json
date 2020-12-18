@@ -14,10 +14,10 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "postgres",
-    "password": "postgres",
-    "database": "CashierDB",
-    "host": "127.0.0.1",
+    "username": "vgtkfxtiwmncnn",
+    "password": "1bc4f9ef67c2d008a8ae0ae3063ac64415c6d565b979e70ed7417119cc6c1645",
+    "database": "d6v2fefo4pfr14",
+    "host": "ec2-3-233-236-188.compute-1.amazonaws.com",
     "dialect": "postgres"
   }
 }
