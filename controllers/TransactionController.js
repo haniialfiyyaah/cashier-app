@@ -6,7 +6,7 @@ class Controller {
   static list(req, res) {
     // destroy()
     Transaction.findAll()
-      .then((data) => res.render("transactions/cashier", { data }))
+      .then((data) => res.render("transactions/list", { data }))
       .catch((err) => res.send(err));
   }
 
@@ -17,7 +17,7 @@ class Controller {
       },
       include: [Item],
     })
-      .then((data) => res.send(data))
+      .then((data) => res.render('transactions/detail', {data}))
       .catch((err) => res.send(err));
   }
 

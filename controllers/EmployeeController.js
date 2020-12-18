@@ -31,7 +31,7 @@ class Controller {
                 }
                 // res.send(data)
             })
-            .catch(err => res.send('EERROR'))
+            .catch(err => res.send(err))
     }
     static logout(req, res) {
         delete req.session.cookie.id
