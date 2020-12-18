@@ -1,60 +1,57 @@
-"use strict"
-const { getData, cancel, buyItems, destroy } = require('../helpers/buyItems')
-const { Transaction, Item, ItemTransaction } = require('../models')
+"use strict";
+const { getData, cancel, buyItems, destroy } = require("../helpers/buyItems");
+const { Transaction, Item, ItemTransaction } = require("../models");
 
 class Controller {
-    static list(req, res) {
-        // destroy()
-        Transaction
-            .findAll()
-            .then(data => res.send(data))
-            .catch(err => res.send(err))
-    }
+  static list(req, res) {
+    // destroy()
+    Transaction.findAll()
+      .then((data) => res.render("transactions/cashier", { data }))
+      .catch((err) => res.send(err));
+  }
 
-    static detail(req, res) {
-        Transaction
-        .findOne({
-            where : {
-              id: +req.params.id  
-            },
-            include: [Item],
-        })
-        .then(data => res.send(data))
-        .catch(err => res.send(err))
-    }
+  static detail(req, res) {
+    Transaction.findOne({
+      where: {
+        id: +req.params.id,
+      },
+      include: [Item],
+    })
+      .then((data) => res.send(data))
+      .catch((err) => res.send(err));
+  }
 
-    static add(req, res) {
-        Item
-            .findAll({
-                attributes: {exclude: ['createdAt','updatedAt']},
-            })
-            .then(items => {
-                // res.send(items.cart)
-                res.render('transactions/cashier', {items: items, cart: getData()})
-            })
-            .catch(err => res.send(err))
-    }
+  static add(req, res) {
+    Item.findAll({
+      attributes: { exclude: ["createdAt", "updatedAt"] },
+    })
+      .then((items) => {
+        // res.send(items.cart)
+        res.render("transactions/cashier", { items: items, cart: getData() });
+      })
+      .catch((err) => res.send(err));
+  }
 
-    static addItem(req, res) {
-        const {ItemId, quantity} = req.body
+  static addItem(req, res) {
+    const { ItemId, quantity } = req.body;
 
-        Item.findOne({
-            where: {
-                id: ItemId
-            }
-        })
-        .then(data => {
-            buyItems(data, +quantity)
-            res.redirect('/transactions/add')
-        })
-        .catch(err => res.send(err))
-    }
+    Item.findOne({
+      where: {
+        id: ItemId,
+      },
+    })
+      .then((data) => {
+        buyItems(data, +quantity);
+        res.redirect("/transactions/add");
+      })
+      .catch((err) => res.send(err));
+  }
 
-    static cancelItem(req, res) {
-        let id = +req.params.id
-        cancel(id)
-        res.redirect('/transactions/add')
-    }
+  static cancelItem(req, res) {
+    let id = +req.params.id;
+    cancel(id);
+    res.redirect("/transactions/add");
+  }
 
     static pay(req, res) {
         let items = getData()
@@ -86,4 +83,4 @@ class Controller {
     }
 }
 
-module.exports = Controller
+module.exports = Controller;
